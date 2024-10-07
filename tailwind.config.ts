@@ -8,7 +8,12 @@ import lineClamp from '@tailwindcss/line-clamp';
 
 const config: Config = {
 	darkMode: ['class'],
-	content: ['./src/app/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}', './src/pages/**/*.{ts,tsx}'],
+	content: [
+		'./pages/**/*.{ts,tsx}',
+		'./components/**/*.{ts,tsx}',
+		'./app/**/*.{ts,tsx}',
+		'./src/**/*.{ts,tsx}',
+	],
 	theme: {
 		container: {
 			center: true,
@@ -69,6 +74,10 @@ const config: Config = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))',
 				},
+				destructive: {
+					DEFAULT: '#ff4d4f',
+					foreground: '#ffffff',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -102,7 +111,6 @@ const config: Config = {
 					to: { height: '0' },
 				},
 			},
-
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
