@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
-
 import '../styles/global.css'
 
 export const metadata: Metadata = {
@@ -15,8 +14,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
+  authModal
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  authModal: React.ReactNode
 }) {
   return (
     <html lang='en'
@@ -26,9 +27,11 @@ export default function RootLayout({
       )}>
       <body className="min-h-screen pt-12 bg-slate-50 antialiased">
         <Navbar />
+        
+        {authModal}
 
         <div className="container max-w-7xl mx-auto h-full pt-12">{children}</div>
-        
+      
         <Toaster />
       </body>
     </html>

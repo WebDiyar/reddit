@@ -1,4 +1,3 @@
-// auth.ts (next-auth configuration)
 import { db } from '@/lib/db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { nanoid } from 'nanoid';
@@ -48,12 +47,16 @@ export const authOptions: NextAuthOptions = {
                 session.user.image = token.picture as string;
                 session.user.username = token.username as string;
             }
+
             return session;
         },
 
+        // управляет созданием и обновлением токенов, проверяет наличие пользователя в базе данных и создает нового, если он не найден.
         async jwt({ token, user }) {
             const dbUser = await db.user.findFirst({
-                where: { email: token.email as string },
+                where: {
+                    email: token.email as string
+                },
             });
 
             if (!dbUser) {
@@ -63,8 +66,12 @@ export const authOptions: NextAuthOptions = {
 
             if (!dbUser.username) {
                 await db.user.update({
-                    where: { id: dbUser.id },
-                    data: { username: nanoid(10) },
+                    where: {
+                        id: dbUser.id
+                    },
+                    data: {
+                        username: nanoid(10)
+                    },
                 });
             }
 
