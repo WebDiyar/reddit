@@ -2,32 +2,74 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import { useState } from "react"
+import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { CreateSubredditPayload } from "@/lib/validators/subreddit";
+import { toast } from "@/hooks/use-toast";
+import { useCustomToasts } from "@/hooks/use-custom-toast";
 
 const Page = () => {
     const [input, setInput] = useState<string>('');
     const router = useRouter();
+    const { loginToast }  = useCustomToasts();
 
-    const { } = useMutation({
+    const { mutate: createComunity, isPending } = useMutation({
         mutationFn: async () => {
-            const payload = {
-                
+            const payload: CreateSubredditPayload = {
+                name: input,
+            };
+
+            const { data } = await axios.post('/api/subreddit', payload);
+            return data as string;
+        },
+
+        onError: (error) => {
+            if (error instanceof AxiosError) {
+
+                if (error.response?.status === 409) {
+                    return toast({
+                        title: 'Subreddit already exists.',
+                        description: 'Please choose a different name.',
+                        variant: 'destructive',
+                    })
+                }
+
+                if (error.response?.status === 422) {
+                    return toast({
+                        title: 'Invalid subreddit name.',
+                        description: 'Please choose a name between 3 and 21 letters.',
+                        variant: 'destructive',
+                    })
+                }
+
+                if (error.response?.status === 500 || 401) {
+                    return loginToast()
+                }
             }
-            const { data } = await axios.post('/api/subreddit');
-        }
+            
+            toast({
+                title: 'There was an error.',
+                description: 'Could not create subreddit.',
+                variant: 'destructive',
+            })
+        },
+
+        onSuccess: (data) => {
+            router.push(`/r/${data}`)
+        },
+
     });
 
     return (
         <div className='container flex items-center h-full max-w-3xl mx-auto'>
             <div className='relative bg-white w-full h-fit p-4 rounded-lg space-y-6'>
-                
+
                 <div className='flex justify-between items-center'>
                     <h1 className='text-xl font-semibold'>Create a Community</h1>
                 </div>
 
-                <hr className='bg-red-500 h-px' />
+                <hr className='bg-zinc-500 h-px' />
 
                 <div>
                     <p className='text-lg font-medium'>Name</p>
@@ -53,14 +95,15 @@ const Page = () => {
                         Cancel
                     </Button>
                     <Button
+                        isLoading={isPending}
                         disabled={input.length === 0}
-                        onClick={() => createCommunity()}>
+                        onClick={() => createComunity()}>
                         Create Community
                     </Button>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Page
+export default Page;

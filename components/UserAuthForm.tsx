@@ -23,7 +23,7 @@ const UserAuthForm: FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...
                 toast({
                     title: 'Success',
                     description: 'Logged in successfully.',
-                    variant: 'destructive',
+                    variant: 'default',
                 });
             } else {
                 throw new Error(result.error);
