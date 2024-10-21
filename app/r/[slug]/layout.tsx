@@ -113,14 +113,16 @@ const Layout = async ({
                                     subredditName={subreddit.name}
                                 />
                             ) : null}
+
                             <Link
                                 className={buttonVariants({
                                     variant: 'outline',
                                     className: 'w-full mb-6',
                                 })}
-                                href={`r/${slug}/submit`}>
+                                href={`${slug}/submit`}>
                                 Create Post
                             </Link>
+
                         </dl>
                     </div>
                 </div>
