@@ -1,6 +1,10 @@
-import { db } from '@/lib/db'
+// import { db } from '@/lib/db'
 import PostFeed from '../PostFeed'
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config'
+
+import { PrismaClient } from '@prisma/client'
+
+const db = new PrismaClient()
 
 const GeneralFeed = async () => {
     const posts = await db.post.findMany({
