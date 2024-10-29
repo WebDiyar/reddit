@@ -8,9 +8,7 @@ export async function POST(req: Request) {
         const session = await getAuthSession();
 
         if (!session?.user) {
-            throw new Response("Unauthorized", {
-                status: 401,
-            })
+            throw new Response("Unauthorized", {status: 401})
         }
 
         const body = await req.json();
@@ -23,9 +21,7 @@ export async function POST(req: Request) {
         })
 
         if (subredditExists) {
-            return new Response('Subreddit already exists', {
-                status: 409
-            })
+            return new Response('Subreddit already exists', {status: 409})
         }
 
         const subreddit = await db.subreddit.create({
@@ -46,13 +42,9 @@ export async function POST(req: Request) {
 
     } catch (error) {
         if (error instanceof z.ZodError) {
-            return new Response(error.message, {
-                status: 422
-            })
+            return new Response(error.message, {status: 422 })
         }
 
-        return new Response('Could not create subreddit', {
-            status: 500
-        })
+        return new Response('Could not create subreddit', { status: 500 })
     }
 }

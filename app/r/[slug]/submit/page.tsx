@@ -1,4 +1,3 @@
-
 import { Editor } from '@/components/Editor'
 import { Button } from '@/components/ui/button'
 import { db } from '@/lib/db'
@@ -18,7 +17,7 @@ const page = async ({ params }: pageProps) => {
     })
 
     if (!subreddit) {
-        return notFound()
+        return notFound();
     }
 
     return (

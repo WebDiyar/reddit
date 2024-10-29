@@ -22,7 +22,6 @@ const Navbar: FC = async () => {
                 
 
                 {/* search bar? */}
-
                 {session?.user ? (
                     <UserAccountNav user={session.user}/>
                 ) : (

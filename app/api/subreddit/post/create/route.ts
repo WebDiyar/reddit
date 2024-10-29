@@ -25,9 +25,7 @@ export async function POST(req: Request) {
 
 
         if (!subscriptionExists) {
-            return new Response("Subscribe to post", {
-                status: 400,
-            })
+            return new Response("Subscribe to post", {status: 400})
         }
 
         await db.post.create({
@@ -46,12 +44,7 @@ export async function POST(req: Request) {
             return new Response(error.message, { status: 400 | 422 })
         }
 
-        return new Response(
-            'Could not post to subreddit at this time.Please try later',
-            {
-                status: 500
-            }
-        )
+        return new Response('Could not post to subreddit at this time.Please try later', { status: 500 })
     }
 
 }
