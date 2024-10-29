@@ -30,7 +30,10 @@ To get started with this project, run
 and copy these .env.example variables into a separate .env file:
 
 ```bash
-DATABASE_URL=
+
+POSTGRES_PRISMA_URL=
+POSTGRES_URL_NON_POOLING=
+
 NEXTAUTH_SECRET=
 
 GOOGLE_CLIENT_ID=
