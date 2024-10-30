@@ -1,4 +1,3 @@
-
 # Reddit 
 
 Built with the Next.js App Router, TypeScript, Prisma + Postgresql, Shadcn Ui & Tailwind css
@@ -22,45 +21,44 @@ Built with the Next.js App Router, TypeScript, Prisma + Postgresql, Shadcn Ui & 
 To get started with this project, run
 
 ```bash
-  git clone https://github.com/WebDiyar/reddit.git
-  cd reddit
-  npm install
+  1) git clone https://github.com/WebDiyar/reddit.git
 ```
-
-and copy these .env.example variables into a separate .env file:
 
 ```bash
-
-POSTGRES_PRISMA_URL=
-POSTGRES_URL_NON_POOLING=
-
-NEXTAUTH_SECRET=
-
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
-UPLOADTHING_SECRET=
-UPLOADTHING_APP_ID=
-
-REDIS_URL=
-REDIS_SECRET=
+  2) cd reddit
 ```
-
-
-and that's all you need to get started!
 
 ```bash
-    npm run build
-
-    Run these commands on package.json to migrate database:
-    "postinstall": "prisma generate",
-    "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio",
-    "prisma:seed": "prisma db seed"
-
-
-    After that: `npm run dev`
+  3) npm install
 ```
+
+```bash
+  4) copy these .env.example variables into a separate .env file:
+
+  DATABASE_URL=
+  NEXTAUTH_SECRET=
+  
+  GOOGLE_CLIENT_ID=
+  GOOGLE_CLIENT_SECRET=
+  
+  UPLOADTHING_SECRET=
+  UPLOADTHING_APP_ID=
+  
+  REDIS_URL=
+  REDIS_SECRET=
+```
+
+
+```
+5) npm run build
+```
+
+```
+6) npx prisma db push
+7) npm run dev
+```
+
+
 ## Acknowledgements
 
 - [Upstash Redis](https://upstash.com/?utm_source=Josh2) for making this possible
